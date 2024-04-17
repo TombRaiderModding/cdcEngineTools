@@ -7,7 +7,7 @@
 //Constants
 const unsigned int DRM_MAX_SECTIONS = 16777215;
 
-#define REPACK_MODE (0)//Must be on for PCD->DDS tool
+#define REPACK_MODE (1)
 
 #if (TR7 || TRAE)
 	#define DRM_VERSION (14)
@@ -25,9 +25,9 @@ struct Section
 	unsigned char ucType;
 	unsigned char ucUnk00;
 	unsigned short usUnk01;
-	unsigned int uiHeaderSize;
+	unsigned int uiPackedData;
 	unsigned int uiHash;
-	unsigned int uiLang;
+	unsigned int uiMask;
 };
 
 //Classes
@@ -66,35 +66,33 @@ private:
 enum SectionType
 {
 #if TR7
-	GENERAL = 0,
-	EMPTY = 1,
-	ANIMATION = 2,
-	PUSHBUFFER_WC = 3,
-	PUSHBUFFER = 4,
-	TEXTURE = 5,
-	WAVE = 6,
-	DTPDATA = 7,
-	SCRIPT = 8,
-	SHADERLIB = 9,
-	NUM_SECTION_TYPES = 10
-
+	GENERAL,
+	EMPTY,
+	ANIMATION,
+	PUSHBUFFER_WC,
+	PUSHBUFFER,
+	TEXTURE,
+	WAVE,
+	DTPDATA,
+	SCRIPT,
+	SHADERLIB,
 #elif TR8
-	GENERAL = 0,
-	EMPTY = 1,
-	ANIMATION = 2,
-	PUSHBUFFER_WC = 3,
-	PUSHBUFFER = 4,
-	TEXTURE = 5,
-	WAVE = 6,
-	DTPDATA = 7,
-	SCRIPT = 8,
-	SHADERLIB = 9,
-	MATERIAL = 10,
-	OBJ = 11,
-	MESH = 12,
-	UNK13 = 13
+	GENERAL,
+	EMPTY,
+	ANIMATION,
+	PUSHBUFFER_WC,
+	PUSHBUFFER,
+	TEXTURE,
+	WAVE,
+	DTPDATA,
+	SCRIPT,
+	SHADERLIB,
+	MATERIAL,
+	OBJECT,
+	RENDERRESOURCE,
+	PDAMAP,
 #endif
-
+	NUM_SECTION_TYPES
 };
 
 #endif

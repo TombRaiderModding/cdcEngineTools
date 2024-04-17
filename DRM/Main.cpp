@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	{
 		if (IsDirectory(argv[1]))
 		{
-			char buff[128];
+			char buff[_MAX_PATH];
 			sprintf_s(buff, "%s%s", argv[1], "\\sectionList.txt");//unsafe
 
 			if (DoesFileExist(buff))
@@ -51,13 +51,13 @@ int main(int argc, char* argv[])
 void PrintToolInfo()
 {
 #if DEBUG
-	std::cout << "DRM v1.2 (DEBUG) for " << GAME_NAME << std::endl;
+	std::cout << "DRM v1.4 (DEBUG) for " << GAME_NAME << std::endl;
 #else
-	std::cout << "DRM v1.2 for " << GAME_NAME << std::endl;
+	std::cout << "DRM v1.4 for " << GAME_NAME << std::endl;
 #endif
 	std::cout << "Platform: " << PLATFORM_FULL_NAME << " (" << PLATFORM_CONFIG_NAME << ")" << std::endl;
 	std::cout << "Built: " << (__DATE__ ", " __TIME__) << std::endl;
-	std::cout << "By Gh0stBlade" << std::endl;
+	std::cout << "By Gh0stBlade, TheIndra, Raq" << std::endl;
 }
 
 void PrintToolUsage()

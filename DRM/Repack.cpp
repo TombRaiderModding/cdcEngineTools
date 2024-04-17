@@ -18,6 +18,13 @@ void RepackSections(const char* sectionListPath, const char* basePath)
 	WriteUInt(ofs, DRM_VERSION);
 	WriteUInt(ofs, 0);//Placeholder
 
+#if TR8
+	WriteUInt(ofs, 0);
+	WriteUInt(ofs, 0);
+	WriteUInt(ofs, 0);
+	WriteUInt(ofs, 0);
+#endif
+
 	//Read and write DRM headers
 	std::ifstream sectionListFile(sectionListPath);
 	while (std::getline(sectionListFile, sectionFileName))
@@ -47,21 +54,12 @@ void RepackSections(const char* sectionListPath, const char* basePath)
 			filename = path;
 		}
 
-		unsigned int hash;
-		sscanf(filename.c_str(), "%x", &hash);
-
 		WriteUInt(ofs, ReadUInt(ifs));
 		WriteUByte(ofs, ReadUByte(ifs));
 		WriteUByte(ofs, ReadUByte(ifs));
 		WriteUShort(ofs, ReadUShort(ifs));
 		WriteUInt(ofs, ReadUInt(ifs));
-		unsigned int sectionHash = ReadUInt(ifs);
-		if (sectionHash != hash)
-		{
-			std::cout << "Warning: Detected hash mis-match!" << std::endl;
-			sectionHash = hash;
-		}
-		WriteUInt(ofs, sectionHash);
+		WriteUInt(ofs, ReadUInt(ifs));
 		
 		WriteUInt(ofs, ReadUInt(ifs));
 		ifs.close();
@@ -94,7 +92,11 @@ void RepackSections(const char* sectionListPath, const char* basePath)
 
 
 	//Write num files
+#if TR7 || TRAE
 	ofs.seekp(0x4, SEEK_SET);
+#elif TR8
+	ofs.seekp(0x14, SEEK_SET);
+#endif
 	WriteUInt(ofs, numSections);
 
 	ofs.flush();

@@ -6,7 +6,7 @@
 		char* szExtensions[]
 		{
 				".gnc",
-				".ept",
+				".empt",
 				".ani",
 				".pbrwc",
 				".pbr",
@@ -14,19 +14,18 @@
 				".wave",
 				".dtp",
 				".script",
-				".shad",
-				".nst"
+				".shad"
 		};
 #elif TR8
 	#if PC
 		char* szExtensions[]
 		{
 			".gnc",
-			".unk01",
+			".empt",
 			".ani",
-			".unk03",
-			".unk04",
-			".tr8pcd9",
+			".pbrwc",
+			".pbr",
+			".pcd",
 			".fsb",
 			".dtp",
 			".script",
@@ -34,7 +33,7 @@
 			".matd",
 			".obj",
 			".tr8mesh",
-			".unk13"
+			".map"
 		};
 	#elif XENON
 		char* szExtensions[]

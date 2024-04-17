@@ -93,9 +93,15 @@ void cDRM::ExtractSections(char* szFilePath)
 		section->ucType = ReadUByte(ifs);
 		section->ucUnk00 = ReadUByte(ifs);
 		section->usUnk01 = ReadUShort(ifs);
-		section->uiHeaderSize = ReadUInt(ifs);	
+		section->uiPackedData = ReadUInt(ifs);
 		section->uiHash = ReadUInt(ifs);
-		section->uiLang = ReadUInt(ifs);
+		section->uiMask = ReadUInt(ifs);
+
+		if (section->ucType >= NUM_SECTION_TYPES)
+		{
+			std::cout << "Fatal Error: Section type exceeded the number of section types!" << std::endl;
+			return;
+		}
 	}
 
 #if TR8 || TRAS
@@ -152,11 +158,11 @@ void cDRM::ExtractSections(char* szFilePath)
 
 			//Skip header info
 #if TR7 || TRAE
-			ifs.seekg(((section->uiHeaderSize >> 0x8) * 0x8), SEEK_CUR);
+			ifs.seekg(((section->uiPackedData >> 0x8) * 0x8), SEEK_CUR);
 #elif TR8
-			ifs.seekg((section->uiHeaderSize >> 0x8), SEEK_CUR);
+			ifs.seekg((section->uiPackedData >> 0x8), SEEK_CUR);
 #elif TRAS
-			ifs.seekg((section->uiHeaderSize >> 0x8), SEEK_CUR);
+			ifs.seekg((section->uiPackedData >> 0x8), SEEK_CUR);
 #else
 #error "Unsupported Game!"
 #endif
@@ -169,9 +175,9 @@ void cDRM::ExtractSections(char* szFilePath)
 			WriteUByte(ofs, section->ucType);
 			WriteUByte(ofs, section->ucUnk00);
 			WriteUShort(ofs, section->usUnk01);
-			WriteUInt(ofs, section->uiHeaderSize);
+			WriteUInt(ofs, section->uiPackedData);
 			WriteUInt(ofs, section->uiHash);
-			WriteUInt(ofs, section->uiLang);
+			WriteUInt(ofs, section->uiMask);
 #endif
 			ofs.write(szSectionData, section->uiSize);
 			
@@ -190,11 +196,11 @@ void cDRM::ExtractSections(char* szFilePath)
 		{
 			//Declare char* to store section data
 #if TR7 || TRAE
-			char* szSectionData = new char[section->uiSize + ((section->uiHeaderSize >> 0x8) * 0x8)];
+			char* szSectionData = new char[section->uiSize + ((section->uiPackedData >> 0x8) * 0x8)];
 #elif TR8
-			char* szSectionData = new char[section->uiSize + (section->uiHeaderSize >> 0x8)];
+			char* szSectionData = new char[section->uiSize + (section->uiPackedData >> 0x8)];
 #elif TRAS
-			char* szSectionData = new char[section->uiSize + (section->uiHeaderSize >> 0x8)];
+			char* szSectionData = new char[section->uiSize + (section->uiPackedData >> 0x8)];
 #endif
 
 			//Declare output file stream
@@ -220,19 +226,19 @@ void cDRM::ExtractSections(char* szFilePath)
 			WriteUByte(ofs, section->ucType);
 			WriteUByte(ofs, section->ucUnk00);
 			WriteUShort(ofs, section->usUnk01);
-			WriteUInt(ofs, section->uiHeaderSize);
+			WriteUInt(ofs, section->uiPackedData);
 			WriteUInt(ofs, section->uiHash);
-			WriteUInt(ofs, section->uiLang);
+			WriteUInt(ofs, section->uiMask);
 #endif
 #if TR7 || TRAE
-			ifs.read(szSectionData, section->uiSize + ((section->uiHeaderSize >> 0x8) * 0x8));
-			ofs.write(szSectionData, section->uiSize + ((section->uiHeaderSize >> 0x8) * 0x8));
+			ifs.read(szSectionData, section->uiSize + ((section->uiPackedData >> 0x8) * 0x8));
+			ofs.write(szSectionData, section->uiSize + ((section->uiPackedData >> 0x8) * 0x8));
 #elif TR8
-			ifs.read(szSectionData, section->uiSize + (section->uiHeaderSize >> 0x8));
-			ofs.write(szSectionData, section->uiSize + (section->uiHeaderSize >> 0x8));
+			ifs.read(szSectionData, section->uiSize + (section->uiPackedData >> 0x8));
+			ofs.write(szSectionData, section->uiSize + (section->uiPackedData >> 0x8));
 #elif TRAS
-			ifs.read(szSectionData, section->uiSize + (section->uiHeaderSize >> 0x8));
-			ofs.write(szSectionData, section->uiSize + (section->uiHeaderSize >> 0x8));
+			ifs.read(szSectionData, section->uiSize + (section->uiPackedData >> 0x8));
+			ofs.write(szSectionData, section->uiSize + (section->uiPackedData >> 0x8));
 #endif
 			//Flush and close ofstream
 			ofs.flush();
