@@ -30,6 +30,9 @@
     <ClCompile Include="Repack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Detect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DRM.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Repack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

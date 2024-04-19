@@ -3,6 +3,7 @@
 
 //Includes
 #include <vector>
+#include <fstream>
 
 //Constants
 const unsigned int DRM_MAX_SECTIONS = 16777215;
@@ -28,6 +29,8 @@ struct Section
 	unsigned int uiPackedData;
 	unsigned int uiHash;
 	unsigned int uiMask;
+
+	unsigned int uiIndex;
 };
 
 //Classes
@@ -39,6 +42,7 @@ public:
 	~cDRM();
 
 	void ExtractSections(char* szFilePath);
+	char* DetectExtension(std::ifstream& ifs, int sectionIndex);
 
 private:
 	char* m_filePath;
@@ -65,7 +69,7 @@ private:
 //Enums
 enum SectionType
 {
-#if TR7
+#if TR7 || TRAE
 	GENERAL,
 	EMPTY,
 	ANIMATION,

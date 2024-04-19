@@ -1,6 +1,7 @@
 #include "DRM.h"
 #include "File.h"
 #include "FileExtensions.h"
+#include "Detect.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -97,6 +98,8 @@ void cDRM::ExtractSections(char* szFilePath)
 		section->uiHash = ReadUInt(ifs);
 		section->uiMask = ReadUInt(ifs);
 
+		section->uiIndex = i;
+
 		if (section->ucType >= NUM_SECTION_TYPES)
 		{
 			std::cout << "Fatal Error: Section type exceeded the number of section types!" << std::endl;
@@ -122,9 +125,12 @@ void cDRM::ExtractSections(char* szFilePath)
 		//Print extraction message to console
 		std::cout << "Extracting Section: " << "[ " << (i + 1) << " / " << this->m_numSections << " ]" << std::endl;
 
+		//Get the extension
+		char* extension = DetectExtension(ifs, i);
+
 		//Define output file path
 		std::stringstream strOutPath2;
-		strOutPath2 << strOutPath << i << "_" << std::hex << section->uiHash << szExtensions[section->ucType];
+		strOutPath2 << strOutPath << i << "_" << std::hex << section->uiHash << extension;
 
 		std::stringstream strOutPath3;
 		strOutPath3 << strOutPath << "\\sectionList.txt";
@@ -147,7 +153,7 @@ void cDRM::ExtractSections(char* szFilePath)
 			//Create output sectionList.txt
 			std::ofstream ofs2(strOutPath3.str(), std::ios::app);
 
-			ofs2 << i << "_" << std::hex << section->uiHash << szExtensions[section->ucType] << std::endl;
+			ofs2 << i << "_" << std::hex << section->uiHash << extension << std::endl;
 			
 			//If not good to go
 			if (!ofs.good())
@@ -209,7 +215,7 @@ void cDRM::ExtractSections(char* szFilePath)
 			//Create output sectionList.txt
 			std::ofstream ofs2(strOutPath3.str(), std::ios::app);
 
-			ofs2 << i << "_" << std::hex << section->uiHash << szExtensions[section->ucType] << std::endl;
+			ofs2 << i << "_" << std::hex << section->uiHash << extension << std::endl;
 
 			//If not good to go
 			if (!ofs.good())
@@ -258,4 +264,19 @@ void cDRM::ExtractSections(char* szFilePath)
 
 	//Print success
 	std::cout << "Successfully Extracted: " << "[ " << (this->m_numSections) << " ] " << " section(s)!" << std::endl;
+}
+
+char* cDRM::DetectExtension(std::ifstream& ifs, int sectionIndex)
+{
+	Section* section = &m_sections[sectionIndex];
+
+	//Detect the extension
+	char* extension = SectionDetect::GetExtension(ifs, section);
+	if (extension)
+	{
+		return extension;
+	}
+
+	//Return the extension for section type if didn't detect anything
+	return szExtensions[section->ucType];
 }
