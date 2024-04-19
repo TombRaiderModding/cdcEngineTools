@@ -7,13 +7,19 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <filesystem>
 
 void RepackSections(const char* sectionListPath, const char* basePath)
 {
 	
 	std::string sectionFileName;
 	int numSections = 0;
-	std::ofstream ofs("Repacked.drm", std::ios::binary);
+
+	//Create the output filename from the input folder
+	std::string outputFilename = std::filesystem::path(basePath).filename().string() + ".drm";
+
+	//Open the output file
+	std::ofstream ofs(outputFilename, std::ios::binary);
 
 	WriteUInt(ofs, DRM_VERSION);
 	WriteUInt(ofs, 0);//Placeholder
