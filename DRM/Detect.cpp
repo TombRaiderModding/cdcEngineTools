@@ -7,7 +7,8 @@ std::vector<SectionDetect*> SectionDetect::s_detections{
 	new ClothDetect(),
 	new MeshDetect(),
 	new ObjectDetect(),
-	new LevelDetect()
+	new LevelDetect(),
+	new ScriptDetect()
 };
 
 //Detect the file extension for a section

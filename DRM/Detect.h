@@ -106,4 +106,18 @@ class LevelDetect : public SectionDetect
 	}
 };
 
+//Detects the script executable in Legend
+class ScriptDetect : public SectionDetect
+{
+	char* GetExtension()
+	{
+		return ".dll";
+	}
+
+	bool Detect(std::ifstream& ifs, Section* section)
+	{
+		return ReadUShort(ifs) == 'ZM';
+	}
+};
+
 #endif
