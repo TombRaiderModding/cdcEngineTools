@@ -52,9 +52,9 @@ int main(int argc, char* argv[])
 void PrintToolInfo()
 {
 #if DEBUG
-	std::cout << "CDRM v1.1 (DEBUG) for " << GAME_NAME << std::endl;
+	std::cout << "CDRM v1.6 (DEBUG) for " << GAME_NAME << std::endl;
 #else
-	std::cout << "CDRM v1.1 for " << GAME_NAME << std::endl;
+	std::cout << "CDRM v1.6 for " << GAME_NAME << std::endl;
 #endif
 	std::cout << "Platform: " << PLATFORM_FULL_NAME << " (" << PLATFORM_CONFIG_NAME << ")" << std::endl;
 	std::cout << "Built: " << (__DATE__ ", " __TIME__) << std::endl;

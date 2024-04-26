@@ -51,9 +51,9 @@ int main(int argc, char* argv[])
 void PrintToolInfo()
 {
 #if DEBUG
-	std::cout << "DRM v1.4 (DEBUG) for " << GAME_NAME << std::endl;
+	std::cout << "DRM v1.6 (DEBUG) for " << GAME_NAME << std::endl;
 #else
-	std::cout << "DRM v1.4 for " << GAME_NAME << std::endl;
+	std::cout << "DRM v1.6 for " << GAME_NAME << std::endl;
 #endif
 	std::cout << "Platform: " << PLATFORM_FULL_NAME << " (" << PLATFORM_CONFIG_NAME << ")" << std::endl;
 	std::cout << "Built: " << (__DATE__ ", " __TIME__) << std::endl;

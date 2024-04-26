@@ -268,9 +268,9 @@ void cDRM::ExtractSections(char* szFilePath)
 
 char* cDRM::DetectExtension(std::ifstream& ifs, int sectionIndex)
 {
-#if TR7 || TRAE
 	Section* section = &m_sections[sectionIndex];
 
+#if TR7 || TRAE
 	//Detect the extension
 	char* extension = SectionDetect::GetExtension(ifs, section);
 	if (extension)
