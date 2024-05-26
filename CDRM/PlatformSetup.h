@@ -13,7 +13,7 @@
 #elif WII 
 	#define PLATFORM_FULL_NAME "WII"
 	#define PLATFORM_CONFIG_NAME "WII-W"
-	#define ENDIAN_BIG (0)
+	#define ENDIAN_BIG (1)
 #elif XENON 
 	#define PLATFORM_FULL_NAME "XENON"
 	#define PLATFORM_CONFIG_NAME "XENON-W"
