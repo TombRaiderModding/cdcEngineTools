@@ -39,10 +39,10 @@
 		char* szExtensions[]
 		{
 				".gnc",
-				".unk01",
+				".empt",
 				".ani",
-				".unk03",
-				".unk04",
+				".pbrwc",
+				".pbr",
 				".tr8x360",
 				".fsb",
 				".dtp",
@@ -51,16 +51,16 @@
 				".matd",
 				".obj",
 				".tr8mesh",
-				".unk13"
+				".map"
 		};
 	#elif PS3
 		char* szExtensions[]
 		{
 			    ".gnc",
-				".unk01",
+				".empt",
 				".ani",
-				".unk03",
-				".unk04",
+				".pbrwc",
+				".pbr",
 				".tr8ps3t",
 				".fsb",
 				".dtp",
@@ -69,16 +69,16 @@
 				".matd",
 				".obj",
 				".tr8mesh",
-				".unk13"
+				".map"
 		};
 	#elif WII
 		char* szExtensions[]
 		{
 				".gnc",
-				".unk01",
+				".empt",
 				".ani",
-				".unk03",
-				".unk04",
+				".pbrwc",
+				".pbr",
 				".tr8sgl",
 				".fsb",
 				".dtp",
@@ -87,16 +87,16 @@
 				".matd",
 				".obj",
 				".tr8mesh",
-				".unk13"
+				".map"
 		};
 	#elif PS2
 		char* szExtensions[]
 		{
 				".gnc",
-				".unk01",
+				".empt",
 				".ani",
-				".unk03",
-				".unk04",
+				".pbrwc",
+				".pbr",
 				".tr8sgl",
 				".fsb",
 				".dtp",
@@ -105,7 +105,7 @@
 				".matd",
 				".obj",
 				".tr8mesh",
-				".unk13"
+				".map"
 		};
 	#else
 		#error "Unsupported Platform!"
