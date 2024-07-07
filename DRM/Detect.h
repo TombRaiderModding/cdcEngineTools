@@ -85,7 +85,7 @@ public:
 		ifs.seekg(168, SEEK_CUR);
 
 		//First section with not the level version number
-		return section->uiIndex == 0 && ReadUInt(ifs) != 0x4C204BB;
+		return section->uiIndex == 0 && section->ucType == GENERAL && ReadUInt(ifs) != 0x4C204BB;
 	}
 };
 
@@ -102,7 +102,7 @@ class LevelDetect : public SectionDetect
 		//Seek to version number
 		ifs.seekg(168, SEEK_CUR);
 
-		return section->uiIndex == 0 && ReadUInt(ifs) == 0x4C204BB;
+		return section->uiIndex == 0 && section->ucType == GENERAL && ReadUInt(ifs) == 0x4C204BB;
 	}
 };
 
