@@ -80,6 +80,7 @@ enum SectionType
 	DTPDATA,
 	SCRIPT,
 	SHADERLIB,
+	COLLMESH,
 #elif TR8
 	GENERAL,
 	EMPTY,

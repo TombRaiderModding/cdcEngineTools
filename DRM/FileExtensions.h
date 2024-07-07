@@ -14,7 +14,8 @@
 				".wave",
 				".dtp",
 				".script",
-				".shad"
+				".shad",
+				".coll"
 		};
 #elif TR8
 	#if PC
