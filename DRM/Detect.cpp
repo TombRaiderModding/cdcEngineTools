@@ -24,6 +24,9 @@ char* SectionDetect::GetExtension(std::ifstream& ifs, Section* section)
 
 		auto detect = detection->Detect(ifs, section);
 
+		// In case a detect read out of bounds
+		ifs.clear();
+
 		//Seek back
 		ifs.seekg(pos);
 
